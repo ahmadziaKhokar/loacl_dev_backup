@@ -4,21 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Get Usrs data</title>
 </head>
 <body>
     <div class="demo">
 
     </div>
     <script type="text/javascript">
-        
-        // There are 3 types of data that we can store in a variable her are some examples
-        let dataType1 = 'string'; // String
-        let dateType2 = 10; // Number
-        let dateType3 = true // boolean
+          /*
+            Q: Find the developers from around the world AND get the desgination which has isActive: true
+            Our result should be something like
+            Result: [ { country: "country name",  person_name:"name", currentJob: "designation "}]
+            In simple words, We need to fetch the developers data with their current designation.
+        */
+    let userData = "./developer-data.json"; // access Json data base form an extrenal file 
+    /* 
+    This function will read the user object and get the results based on passed parameters
+    */
+function findActiveDeveloper(obj, target) {
+   let result = [] // create an empty array
+   for (const key in obj) { // get all keys in the object
+      let countryName = ``,developerName = ``,designation = ``, cruntJob = []; // store filtered data 
+      for (let i = 0; i < obj[key].length; i++) { // get data from the nested array
+         const element = obj[key][i];
+         if (element['position'] === target) { // filter result based on the target parameter passed
+            countryName = key // get country name
+            developerName = element["name"] // get developer name
+            designation = element['jobs'].filter(item => {
+               if(item.isActive === true )
+                  cruntJob.push(item.designation) 
+            })
+         } 
+      }
+      if (developerName && countryName && cruntJob.length > 0) {
+         let developerDetails = {
+            "Person Name": developerName,
+            "Country Name": countryName,
+            "Current Job": cruntJob.join(' and ')
+         } // create an object based on filtered data
+         result.push(developerDetails) // push the output object in an array
+      }
+   }
+   return console.log(result)
+}
+fetch(userData)
+   .then(response => response.json()) // Parse the response as JSON
+   .then(data => {
+      /* function calling 
+         the first parameter is an object of developer data 
+         the secound parameter is position 
+      */
+      findActiveDeveloper(data, "Developer")
+   }) 
+   .catch(error => console.error(error)); // Handle any errors 
 
-        // We can also check a variable stored data type using typeof  console.log(typeof variableName )
-        console.log(typeof dataType1)
     </script>
 </body>
 </html>
