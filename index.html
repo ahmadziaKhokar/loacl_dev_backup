@@ -7,18 +7,134 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="demo">
-
-    </div>
-    <script type="text/javascript">
+    <script type="text/JavaScript">
+        // Q: Find the developers from around the world AND get the desgination which has isActive: true
+        // Our result should be something like
+        // Result: [ { country: "country name",  person_name:"name", currentJob: "designation "}]
+        // In simple words, We need to fetch the developers data with their current designation.
         
-        // There are 3 types of data that we can store in a variable her are some examples
-        let dataType1 = 'string'; // String
-        let dateType2 = 10; // Number
-        let dateType3 = true // boolean
-
-        // We can also check a variable stored data type using typeof  console.log(typeof variableName )
-        console.log(typeof dataType1)
+          // object data set
+          let countryInfo = 
+          {
+           "pakistan": [
+              {
+                 "position": "QA Executive",
+                 "name": "ahmad",
+                 "jobs": [
+                    {
+                       "designation": "Internee",
+                       "isActive": false
+                    },
+                    {
+                       "designation": "HR MANAGER",
+                       "isActive": true
+                    }
+                 ]
+              },
+              {
+                 "position": "Developer",
+                 "name": "umair",
+                 "jobs": [
+                    {
+                       "designation": "Frontend dev",
+                       "isActive": false
+                    },
+                    {
+                       "designation": "Backend dev",
+                       "isActive": true
+                    }
+                 ]
+              },
+              {
+                 "position": "Developer",
+                 "name": "arsalan",
+                 "jobs": [
+                    {
+                       "designation": "frontend",
+                       "isActive": false
+                    },
+                    {
+                       "designation": ".net dev",
+                       "isActive": true
+                    }
+                 ]
+              },
+              {
+                 "position": "Manager",
+                 "name": "usman",
+                 "jobs": [
+                    {
+                       "designation": "Assistant manager",
+                       "isActive": false
+                    },
+                    {
+                       "designation": "Manager",
+                       "isActive": true
+                    }
+                 ]
+              }
+           ],
+           "UK": [
+              {
+                 "position": "Manager",
+                 "name": "John",
+                 "jobs": [
+                    {
+                       "designation": "Manager",
+                       "isActive": false
+                    },
+                    {
+                       "designation": "HR",
+                       "isActive": true
+                    }
+                 ]
+              },
+              {
+                 "position": "Developer",
+                 "name": "fahad",
+                 "jobs": [
+                    {
+                       "designation": "HubSpot dev",
+                       "isActive": true
+                    },
+                    {
+                       "designation": "Software dev",
+                       "isActive": true
+                    },
+                    {
+                       "designation": "Backend dev",
+                       "isActive": false
+                    }
+                 ]
+              }
+           ]
+        };
+        const resultData = [];// new empty array
+        for(let country in countryInfo){
+          let countryName = ''; // assigned key to variable for countryName name for each loop iteration
+          let devName = ''; // empty variable for person name to be used in loop for each loop iteration
+          let currentjob = []; // empty variable for current job to be used in loop for each loop iteration
+          countryName = country
+          // for of loop used for iteration of object key
+          for(let devinfo of countryInfo[country]){
+            if(devinfo.position == 'Developer'){
+              devName = devinfo.name; // assigned value for person name
+              devinfo.jobs.filter(e => {
+                if(e.isActive == true){
+                  currentjob.push(e.designation);
+                }
+              })
+               // new object with targeted values
+              const filteredValues= {
+                countryName : country,
+                person_name: devName,
+                currentJob: currentjob
+              };
+              resultData.push(filteredValues); //pushed object in array for each loop iteration
+            }
+          }
+        }
+        console.log(resultData);// print each array of object on every iteration
     </script>
 </body>
 </html>
