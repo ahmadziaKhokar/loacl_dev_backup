@@ -10,51 +10,51 @@
     <div class="demo">
 
     </div>
-    <script type="text/javascript">
-          /*
-            Q: Find the developers from around the world AND get the desgination which has isActive: true
-            Our result should be something like
-            Result: [ { country: "country name",  person_name:"name", currentJob: "designation "}]
-            In simple words, We need to fetch the developers data with their current designation.
-        */
-    let userData = "./developer-data.json"; // access Json data base form an extrenal file 
-    /* 
-    This function will read the user object and get the results based on passed parameters
-    */
-function findActiveDeveloper(obj, target) {
+<script type="text/javascript">
+    /*
+      Q: Find the developers from around the world AND get the desgination which has isActive: true
+      Our result should be something like
+      Result: [ { country: "country name",  person_name:"name", currentJob: "designation "}]
+      In simple words, We need to fetch the developers data with their current designation.
+   */
+let fetchUserData = "./developer-data.json"; // access Json data base form an extrenal file 
+// This function will read the user object and get the results based on passed parameters
+function findActiveDeveloper(countrysInfo, target) {
    let result = [] // create an empty array
-   for (const key in obj) { // get all keys in the object
-      let countryName = ``,developerName = ``,designation = ``, cruntJob = []; // store filtered data 
-      for (let i = 0; i < obj[key].length; i++) { // get data from the nested array
-         const element = obj[key][i];
-         if (element['position'] === target) { // filter result based on the target parameter passed
-            countryName = key // get country name
-            developerName = element["name"] // get developer name
-            designation = element['jobs'].filter(item => {
-               if(item.isActive === true )
-                  cruntJob.push(item.designation) 
-            })
+   for (const country in countrysInfo) { // get all keys in the object
+      let countryName = ``,developerName = ``, cruntJob = []; // store filtered data 
+      for (let i = 0; i < countrysInfo[country].length; i++) { // get data from the nested array
+         const eachCountryData = countrysInfo[country][i];
+         if (eachCountryData.position === target) { // filter result based on the target parameter passed
+            countryName = country // get country name
+            developerName = eachCountryData.name // get developer name
+            eachCountryData.jobs.filter(job => {
+               if(job.isActive === true )
+                  cruntJob.push(job.designation)
+               })
+            if (developerName && countryName && cruntJob.length > 0) {
+               let developerDetails = {
+                  "Person Name": developerName,
+                  "Country Name": countryName,
+                  "Current Job": cruntJob
+               } // create an object based on filtered data
+               result.push(developerDetails) // push the output object in an array
+            }
          } 
+         
       }
-      if (developerName && countryName && cruntJob.length > 0) {
-         let developerDetails = {
-            "Person Name": developerName,
-            "Country Name": countryName,
-            "Current Job": cruntJob.join(' and ')
-         } // create an object based on filtered data
-         result.push(developerDetails) // push the output object in an array
-      }
+      
    }
    return console.log(result)
-}
-fetch(userData)
+} 
+fetch(fetchUserData)
    .then(response => response.json()) // Parse the response as JSON
-   .then(data => {
+   .then(userData => {
       /* function calling 
          the first parameter is an object of developer data 
          the secound parameter is position 
       */
-      findActiveDeveloper(data, "Developer")
+      findActiveDeveloper(userData, "Developer")
    }) 
    .catch(error => console.error(error)); // Handle any errors 
 
