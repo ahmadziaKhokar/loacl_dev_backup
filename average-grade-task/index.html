@@ -19,15 +19,13 @@
         ];
         for(let i in students){
             let sum = 0;// variable to be used for sum of grades
-            let totalElementsCounter = 0; // variable to find total array elements for average
             //iteration to calculate the sum of grades and find total array elements for average
             for(let j=0; j < students[i]["grades"].length; j++){
             sum += students[i]["grades"][j]; // sum of grades on each iteration
-            totalElementsCounter++; // find number of array elements
             }
             // Adding a new property to existing array of objects with average calculation
             
-            students[i]["averageGrade"] = sum / totalElementsCounter;
+            students[i]["averageGrade"] = (sum / students[i]["grades"].length).toFixed(2);
         }
         console.log("Updated Array of objects", students); // print Updated Array of objects
     </script>
