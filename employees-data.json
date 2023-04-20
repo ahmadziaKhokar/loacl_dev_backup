@@ -1,7 +1,7 @@
 [
-    { "name": "John", "age": 28, "department": "HR", "salary": 50000 },
-    { "name": "Mike", "age": 43, "department": "IT", "salary": 90000 },
-    { "name": "Jane", "age": 35, "department": "IT", "salary": 80000 },
-    { "name": "Bob", "age": 22, "department": "IT", "salary": 55000 }
+    { "name": "John", "age": 28, "department": ["HR", "Marketing"], "salary": 50000 },
+    { "name": "Mike", "age": 43, "department": ["IT","Marketing", "Dev"], "salary": 90000 },
+    { "name": "Jane", "age": 35, "department": ["IT", "HR"], "salary": 80000 },
+    { "name": "Bob", "age": 22, "department": ["IT", "Marketing"], "salary": 55000 }
     
   ]

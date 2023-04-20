@@ -90,13 +90,21 @@ fetch(fetchUserData)
    /*
    Problem statement:
       You have been provided with an array of objects that represent different employees of a company. 
-      Each object contains the name, age, department, and salary of the employee. 
+      Each object contains the name, age, Arrya of departments, and salary of the employee. 
       Your task is to create a function that takes this array as input and returns a new array of objects with the following conditions:
       The employees should be sorted in ascending order of their ages.
-      Only employees from the "IT" department should be included in the new array.
+      Only employees from the "Marketing" department should be included in the new array.
       The salary of each employee should be multiplied by 1.2.
+DATA = [
+   { "name": "John", "age": 28, "department": ["HR", "Marketing"], "salary": 50000 },
+    { "name": "Mike", "age": 43, "department": ["IT","Marketing", "Dev"], "salary": 90000 },
+    { "name": "Jane", "age": 35, "department": ["IT", "HR"], "salary": 80000 },
+    { "name": "Bob", "age": 22, "department": ["IT", "Marketing"], "salary": 55000 }
+ ]
 */
 // Put sample data in .json file and fetch data from file using fetch with async functions and await , must use filter method and also try to use map method here.
+
+
 
 try {
    const fetchUsers = async () => { // async keyword is used with 
@@ -104,18 +112,22 @@ try {
    const allUsers = await response.json();
    return allUsers
 }
-async function getData() {
-   let allUsersData = await fetchUsers(); // wait for the fetchUsers function to be invoked 
-   // The allUsersData is contaning all the information in the json file we have fetched 
-   let departmentalRecord = allUsersData.filter(employee => employee.department === 'IT'); // this will filter only IT demartment
-       departmentalRecord = departmentalRecord.map(item => ({...item, salary : item.salary*1.2 /*, ...employee [ spread operator ]*/ })); // 
-   const sortedData = departmentalRecord.sort((empOne, empTwo) => empOne.age - empTwo.age ) // sort based on age
-   console.log(sortedData) // log data in browser console
+
+async function getUserData() {
+   let allUsersData = await fetchUsers();
+   let departmentalRecord =  allUsersData.filter(employee => (employee.department.filter(department => department === 'Marketing')).join()) // filter form an array of object contaning any key which contains array 
+       departmentalRecord = departmentalRecord.sort((empOne, empTwo) => empOne.age - empTwo.age ) // sort by age     
+       departmentalRecord = departmentalRecord.map(employee => ({...employee, salary:employee.salary*1.2})) // increment 
+    console.log(departmentalRecord)
 }
-getData()
+getUserData()
 } catch (error) {
    console.log(error)
 }
+
+
+
+
  </script>
 </body>
 </html>
