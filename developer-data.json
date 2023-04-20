@@ -1,0 +1,104 @@
+{
+    "pakistan": [
+       {
+          "position": "QA Executive",
+          "name": "ahmad",
+          "jobs": [
+             {
+                "designation": "Internee",
+                "isActive": false
+             },
+             {
+                "designation": "HR MANAGER",
+                "isActive": true
+             }
+          ]
+       },
+       {
+          "position": "Developer",
+          "name": "umair",
+          "jobs": [
+             {
+                "designation": "Frontend dev",
+                "isActive": true
+             },
+             {
+                "designation": "Backend dev",
+                "isActive": true
+             }
+          ]
+       },
+       {
+          "position": "Manager",
+          "name": "usman",
+          "jobs": [
+             {
+                "designation": "Assistant manager",
+                "isActive": false
+             },
+             {
+                "designation": "Manager",
+                "isActive": true
+             },
+             {
+               "designation": "HubSpot Backend Developer",
+               "isActive": false
+            }
+          ]
+       }
+    ],
+    "UK": [
+       {
+          "position": "Manager",
+          "name": "John",
+          "jobs": [
+             {
+                "designation": "Manager",
+                "isActive": false
+             },
+             {
+                "designation": "HR",
+                "isActive": true
+             }
+          ]
+       },
+       {
+        "position": "SEO Export",
+        "name": "Rana John",
+        "jobs": [
+           {
+              "designation": "Manager",
+              "isActive": false
+           },
+           {
+              "designation": "Marketing",
+              "isActive": true
+           }
+        ]
+     },
+       {
+          "position": "Developer",
+          "name": "fahad",
+          "jobs": [
+             {
+                "designation": "HubSpot dev",
+                "isActive": true
+             },
+             {
+                "designation": "Backend dev",
+                "isActive": false
+             }
+          ]
+       },
+       {
+         "position": "Developer",
+         "name": "umair",
+         "jobs": [
+            {
+               "designation": "Backend dev",
+               "isActive": true
+            }
+         ]
+      }
+    ]
+ }

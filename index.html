@@ -4,21 +4,87 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Get Usrs data</title>
 </head>
 <body>
     <div class="demo">
 
     </div>
-    <script type="text/javascript">
-        
-        // There are 3 types of data that we can store in a variable her are some examples
-        let dataType1 = 'string'; // String
-        let dateType2 = 10; // Number
-        let dateType3 = true // boolean
+<script type="text/javascript">
+    /*
+      Q: Find the developers from around the world AND get the desgination which has isActive: true
+      Our result should be something like
+      Result: [ { country: "country name",  person_name:"name", currentJob: "designation "}]
+      In simple words, We need to fetch the developers data with their current designation.
+   */
+let fetchUserData = "./developer-data.json"; // access Json data base form an extrenal file 
+// This function will read the user object and get the results based on passed parameters
+function findActiveDeveloper(countrysInfo, target) {
+   let result = [] // create an empty array
+   for (const country in countrysInfo) { // get all keys in the object
+      let countryName = ``,developerName = ``, cruntJob = []; // store filtered data 
+      for (let i = 0; i < countrysInfo[country].length; i++) { // get data from the nested array
+         const eachCountryData = countrysInfo[country][i];
+         if (eachCountryData.position === target) { // filter result based on the target parameter passed
+            countryName = country // get country name
+            developerName = eachCountryData.name // get developer name
+            eachCountryData.jobs.filter(job => {
+               if(job.isActive === true )
+                  cruntJob.push(job.designation)
+               })
+            if (developerName && countryName && cruntJob.length > 0) {
+               let developerDetails = {
+                  "Person Name": developerName,
+                  "Country Name": countryName,
+                  "Current Job": cruntJob
+               } // create an object based on filtered data
+               result.push(developerDetails) // push the output object in an array
+            }
+         } 
+         
+      }
+      
+   }
+   return console.log(result)
+} 
+fetch(fetchUserData)
+   .then(response => response.json()) // Parse the response as JSON
+   .then(userData => {
+      /* function calling 
+         the first parameter is an object of developer data 
+         the secound parameter is position 
+      */
+      findActiveDeveloper(userData, "Developer")
+   }) 
+   .catch(error => console.error(error)); // Handle any errors 
 
-        // We can also check a variable stored data type using typeof  console.log(typeof variableName )
-        console.log(typeof dataType1)
     </script>
+
+<script>
+   /*
+   Problem statement:
+   Create a program that takes an array of objects representing 
+   different students, each object containing 
+   the student's name, age, and a list of their grades. 
+   Your program should iterate over the array using a for-in loop, 
+   calculate the average grade for each student, 
+   and add a new property to the object called "averageGrade" with 
+   the calculated value. Finally, the program should log 
+   the updated array of objects to the console.
+   */
+   const studentsDetails = [
+   { name: "Alice", age: 20, grades: [75, 80, 90] },
+   { name: "Bob", age: 22, grades: [85, 70, 78] },
+   { name: "Charlie", age: 21, grades: [90, 92, 88] }
+   ];
+   for (const student of studentsDetails) { // access users database
+      let gradesSum = 0; // get sum of user grades
+      for (const grade in student.grades) {
+         gradesSum += student.grades[grade] // add each grade and get sum of all values
+      }
+      student.averageGrade = (gradesSum/student.grades.length).toFixed(2) // Add averageGrade key with value in each student database
+   }
+   console.log(studentsDetails)// Log student object array in the user console
+ </script>
 </body>
 </html>
