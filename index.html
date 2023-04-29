@@ -115,19 +115,16 @@ try {
 
 async function getUserData() {
    let allUsersData = await fetchUsers();
-   let departmentalRecord =  allUsersData.filter(employee => (employee.department.filter(department => department === 'Marketing')).join()) // filter form an array of object contaning any key which contains array 
-       departmentalRecord = departmentalRecord.sort((empOne, empTwo) => empOne.age - empTwo.age ) // sort by age     
+   // let departmentalRecord = allUsersData.filter(employee => (employee.department.filter(department => department === 'Marketing')).join()) // filter form an array of object contaning any key which contains array 
+   let departmentalRecord = allUsersData.filter( employee => employee.department.includes("Marketing")) // a new method using chat GPT 
        departmentalRecord = departmentalRecord.map(employee => ({...employee, salary:employee.salary*1.2})) // increment 
+       departmentalRecord = departmentalRecord.sort((empOne, empTwo) => empOne.age - empTwo.age ) // sort by age 
     console.log(departmentalRecord)
 }
 getUserData()
 } catch (error) {
    console.log(error)
 }
-
-
-
-
  </script>
 </body>
 </html>
